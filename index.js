@@ -3,7 +3,7 @@ const express = require('express'); // Using require because Node doesn't suppor
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send({ hi: 'there' });
+  res.send({ seeyalater: 'aligator' });
 });
 
 // Express app to listen on dynamically assigned port
