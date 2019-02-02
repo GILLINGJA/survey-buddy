@@ -11,4 +11,8 @@ module.exports = (app) => {
   // Passport automatically recognises there is a code in the URL, meaning authentication has already happened...
   // ... and takes this code, putting it into the accessToken variable
   app.get('/auth/google/callback', passport.authenticate('google'));
+
+  app.get('/api/current_user', (req, res) => {
+    res.send(req.user);
+  });
 };
