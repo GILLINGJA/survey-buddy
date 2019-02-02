@@ -1,8 +1,8 @@
 const express = require('express'); // Using require because Node doesn't support ES6 import statements yet
 const mongoose = require('mongoose');
 
-require('./services/passport'); // Not being referenced in this file, just executed
 require('./models/User');
+require('./services/passport'); // Not being referenced in this file, just executed
 
 const authRoutes = require('./routes/authRoutes');
 const keys = require('./config/keys');
