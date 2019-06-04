@@ -29,6 +29,18 @@ app.use(passport.session());
 authRoutes(app);
 billingRoutes(app);
 
+// Handling production
+if(process.env.NODE_ENV === 'production') {
+  // Express will serve up production assets (like main.js & main.css)
+  app.use(express.static('client/build'));
+
+  // Express will serve up index.html when asked for a route it doesn't recognise
+  const path = require('path');
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
 // Express app to listen on dynamically assigned port
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
