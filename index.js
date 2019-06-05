@@ -6,9 +6,11 @@ const bodyParser = require('body-parser');
 
 const authRoutes = require('./routes/authRoutes');
 const billingRoutes = require('./routes/billingRoutes');
+const surveyRoutes = require('./routes/surveyRoutes');
 const keys = require('./config/keys');
 
 require('./models/User');
+require('./models/Survey');
 require('./services/passport'); // Not being referenced in this file, just executed
 
 mongoose.connect(keys.MONGO_URI);
@@ -28,6 +30,7 @@ app.use(passport.session());
 
 authRoutes(app);
 billingRoutes(app);
+surveyRoutes(app);
 
 // Handling production
 if(process.env.NODE_ENV === 'production') {
