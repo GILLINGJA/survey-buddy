@@ -4,9 +4,9 @@ const cookieSession = require('cookie-session'); // Does all the cookie creation
 const passport = require('passport');
 const bodyParser = require('body-parser');
 
-const authRoutes = require('./routes/authRoutes');
-const billingRoutes = require('./routes/billingRoutes');
-const surveyRoutes = require('./routes/surveyRoutes');
+// const authRoutes = require('./routes/authRoutes');
+// const billingRoutes = require('./routes/billingRoutes');
+// const surveyRoutes = require('./routes/surveyRoutes');
 const keys = require('./config/keys');
 
 require('./models/User');
@@ -28,9 +28,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-authRoutes(app);
-billingRoutes(app);
-surveyRoutes(app);
+require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 // Handling production
 if(process.env.NODE_ENV === 'production') {
