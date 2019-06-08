@@ -9,6 +9,10 @@ import 'materialize-css/dist/css/materialize.min.css';
 import App from './components/App';
 import reducers from './reducers';
 
+// TEMP CODE TO TEST BACKEND MAILER SETUP
+import axios from 'axios';
+window.axios = axios;
+
 // createStore() arguments:
 // Arg 1 - reducer
 // Arg 2 - initial state
