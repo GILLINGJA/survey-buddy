@@ -4,16 +4,13 @@ const cookieSession = require('cookie-session'); // Does all the cookie creation
 const passport = require('passport');
 const bodyParser = require('body-parser');
 
-// const authRoutes = require('./routes/authRoutes');
-// const billingRoutes = require('./routes/billingRoutes');
-// const surveyRoutes = require('./routes/surveyRoutes');
 const keys = require('./config/keys');
 
 require('./models/User');
 require('./models/Survey');
 require('./services/passport'); // Not being referenced in this file, just executed
 
-mongoose.connect(keys.MONGO_URI);
+mongoose.connect(keys.MONGO_URI, { useNewUrlParser: true });
 
 const app = express();
 
