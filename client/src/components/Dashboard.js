@@ -7,7 +7,7 @@ const Dashboard = () => {
     <div style={{ width: '80%', margin: 'auto' }}>
       <SurveyList />
       <div className="fixed-action-btn" style={{ marginRight: '16%' }}>
-        <Link to='/surveys/new' className="cyan btn-floating btn-large waves-effect waves-light">
+        <Link to='/surveys/new' className="cyan btn-floating btn-large waves-effect waves-light hoverable">
           <i className="material-icons">add</i>
         </Link>
       </div>
