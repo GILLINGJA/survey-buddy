@@ -23,38 +23,37 @@ module.exports = app => {
     res.send(`<h2 style="text-align: center;">Thanks for voting!</h2>`);
   });
 
-  app.post('/api/surveys/webhooks', (hello) => {
-    console.log('POST request received... Hello ' + hello);
+  app.post('/api/surveys/webhooks', (req, res) => {
 
-    // const p = new Path('/api/surveys/:surveyId/:choice');
-    //
-    // _.chain(req.body)
-    //   .map(({email, url}) => {
-    //     const match = p.test(new URL(url).pathname);
-    //     if(match) {
-    //       return { email, surveyId: match.surveyId, choice: match.choice };
-    //     }
-    //   })
-    //   .compact()
-    //   .uniqBy('email', 'surveyId')
-    //   .each(({surveyId, email, choice}) => {
-    //     Survey.updateOne(
-    //       {
-    //         _id: surveyId,
-    //         recipients: {
-    //           $elemMatch: { email: email, responded: false }
-    //         }
-    //       },
-    //       {
-    //         $inc: { [choice]: 1 },
-    //         $set: { 'recipients.$.responded': true },
-    //         lastResponded: new Date()
-    //       }
-    //     ).exec();
-    //   })
-    //   .value();
+    const p = new Path('/api/surveys/:surveyId/:choice');
 
-    // res.send({});
+    _.chain(req.body)
+      .map(({email, url}) => {
+        const match = p.test(new URL(url).pathname);
+        if(match) {
+          return { email, surveyId: match.surveyId, choice: match.choice };
+        }
+      })
+      .compact()
+      .uniqBy('email', 'surveyId')
+      .each(({surveyId, email, choice}) => {
+        Survey.updateOne(
+          {
+            _id: surveyId,
+            recipients: {
+              $elemMatch: { email: email, responded: false }
+            }
+          },
+          {
+            $inc: { [choice]: 1 },
+            $set: { 'recipients.$.responded': true },
+            lastResponded: new Date()
+          }
+        ).exec();
+      })
+      .value();
+
+    res.send({});
   });
 
   app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
